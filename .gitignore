@@ -1,8 +1,0 @@
-.DS_Store
-
-/resources
-/public
-
-.idea/
-.bin
-.hugo_build.lock

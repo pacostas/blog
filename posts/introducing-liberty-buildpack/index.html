@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Introducing the Liberty buildpack | Paketo Buildpacks | Blog</title>
+<link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-language" content="en-us" />
+
+<meta property='og:site_name' content="Paketo Buildpacks | Blog">
+<meta property='og:title' content="Introducing the Liberty buildpack">
+<meta property='og:url' content="https://blog.paketo.io/posts/introducing-liberty-buildpack/">
+<meta property='og:image' content='/images/logo512.png'/>
+<meta name="twitter:title" content="Paketo Buildpacks | Blog" />
+<meta name="twitter:url" content="https://blog.paketo.io/posts/introducing-liberty-buildpack/" />
+<meta name="twitter:card" content="" />
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TJMQZ5RDFG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TJMQZ5RDFG');
+</script><link rel="stylesheet" href="/scss/main.min.css">
+
+  </head>
+  <body>
+    <div class="post">
+      <header>
+        <a href="/">
+          <img class="logo" src="/images/logo512.png" />
+          <h1>Paketo Buildpacks | Blog</h1>
+        </a>
+      </header>
+      <section>
+        <h1>Introducing the Liberty buildpack</h1>
+        <section class="author"><img src="/images/authors/kevinortega.jpg" /><name>Kevin Ortega</name></section>
+        <date>Monday, Apr 4, 2022</date>
+        <article>
+          <p><img src="/images/posts/0008/open-liberty-logo.png" alt="Open Liberty Logo"></p>
+<p><a href="https://github.com/paketo-buildpacks/liberty">Liberty</a> is finally available in Paketo and included in the <a href="https://github.com/paketo-buildpacks/java">java</a> buildpack! Liberty is an open application framework designed for the cloud. It’s small, lightweight, and designed with modern cloud-native application development in mind.</p>
+<p>With the Liberty buildpack, you can:</p>
+<ul>
+<li>Build Java apps from source or a pre-configured on-prem Liberty</li>
+<li>Install Liberty and user custom features</li>
+<li>Install Liberty interim fixes</li>
+<li>Create UBI-based OCI images</li>
+</ul>
+<h2 id="what-do-you-need">What do you need?</h2>
+<ul>
+<li>Your application source or a pre-configured on-prem Liberty</li>
+<li><a href="https://hub.docker.com/search?type=edition&amp;offering=community">Docker</a></li>
+<li><a href="https://buildpacks.io/docs/tools/pack/">pack</a></li>
+</ul>
+<h2 id="lets-get-started">Let&rsquo;s get started!</h2>
+<p>The following examples use the <a href="https://openliberty.io/guides/getting-started.html">Open Liberty starter</a> application as the application source.
+Download the Open Liberty starter application:</p>
+<pre><code>git clone https://github.com/openliberty/guide-getting-started.git
+cd guide-getting-started/start
+</code></pre><p>If you&rsquo;re new to buildpacks, I recommend you set a default builder as this removes the need to set a builder each time you build an image.</p>
+<pre><code>pack config default-builder gcr.io/paketo-buildpacks/builder:base
+</code></pre><p>Build the application with a minimal footprint with only the Liberty features required to run the application and IBM Semeru OpenJ9:</p>
+<pre><code> pack build --env BP_JAVA_APP_SERVER=liberty \
+  --env BP_LIBERTY_PROFILE=jakartaee9 \
+  --buildpack paketo-buildpacks/eclipse-openj9 --buildpack paketo-buildpacks/java myapp
+</code></pre><p>Your application is now transformed into an OCI image!</p>
+<h2 id="now-what">Now what?</h2>
+<p>With your OCI image, you can run your application locally with the <code>docker run</code> command.</p>
+<pre><code>docker run --rm -p 9080:9080 myapp
+</code></pre><p>or deploy your application to any Kubernetes-based platform, such as <a href="https://www.redhat.com/en/technologies/cloud-computing/openshift">Red Hat OpenShift</a>, by using an <a href="https://github.com/OpenLiberty/open-liberty-operator">Open Liberty operator</a></p>
+<h2 id="build-your-app-from-an-on-prem-open-liberty-installation">Build your app from an on-prem Open Liberty installation</h2>
+<p>You can build from an on-prem Open Liberty installation by using a packaged Liberty server. Run the following command to package your server.</p>
+<pre><code>bin/server package defaultServer --include=usr
+</code></pre><p>You can then supply the packaged server to the build by using the <code>--path</code> argument:</p>
+<pre><code>pack build --path &lt;packaged-server-zip-path&gt; \
+ --buildpack paketo-buildpacks/eclipse-openj9 \
+ --buildpack paketo-buildpacks/java myapp
+</code></pre><p>Alternatively, you can build from a Liberty server installation by changing your working directory to the installation root that contains the <code>wlp</code> directory and running the following command:</p>
+<pre><code>pack build  \
+ --buildpack paketo-buildpacks/eclipse-openj9 \
+ --buildpack paketo-buildpacks/java myapp
+</code></pre><h2 id="learn-more">Learn more:</h2>
+<ul>
+<li><a href="https://github.com/paketo-buildpacks/liberty/blob/main/README.md">Paketo Liberty buildpack</a></li>
+<li><a href="https://github.com/paketo-buildpacks/liberty/blob/main/docs/using-liberty-stack.md">Create a UBI-based container image</a></li>
+</ul>
+
+        </article>
+      </section>
+      <footer class="post">
+        <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Paketo%20Buildpacks%20%7c%20Blog%20%7c%20Introducing%20the%20Liberty%20buildpack&amp;url=https://blog.paketo.io/posts/introducing-liberty-buildpack/" target="_blank" rel="noopener noreferrer">
+  <img src="/images/social/twitter.png" />
+</a>
+
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://blog.paketo.io/posts/introducing-liberty-buildpack/" target="_blank" rel="noopener noreferrer">
+  <img src="/images/social/linkedin.png" />
+</a>
+
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.paketo.io/posts/introducing-liberty-buildpack/" target="_blank" rel="noopener noreferrer">
+  <img src="/images/social/facebook.png" />
+</a>
+
+      </footer>
+    </div>
+  </body>
+</html>
