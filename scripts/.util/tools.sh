@@ -124,7 +124,7 @@ function tools::install() {
   token="${1:-}"
 
   util::tools::hugo::install \
-    --directory "${BUILDPACKDIR}/.bin" \
+    --directory "${ROOTDIR}/.bin" \
     --token "${token}"
 }
 
