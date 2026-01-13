@@ -4,7 +4,7 @@
       <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Building apps for Kubernetes? Get to Know Paketo Buildpacks. | Paketo Buildpacks | Blog</title>
-<link rel="shortcut icon" type="image/png" href="../../favicon.ico" />
+<link rel="shortcut icon" type="image/png" href="/favicon.ico" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="content-language" content="en-us" />
 
@@ -24,23 +24,23 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-TJMQZ5RDFG');
-</script><link rel="stylesheet" href="../../scss/main.min.css">
+</script><link rel="stylesheet" href="/scss/main.min.css">
 
   </head>
   <body>
     <div class="post">
       <header>
-        <a href="../../">
-          <img class="logo" src="../../images/logo512.png" />
+        <a href="/">
+          <img class="logo" src="/images/logo512.png" />
           <h1>Paketo Buildpacks | Blog</h1>
         </a>
       </header>
       <section>
         <h1>Building apps for Kubernetes? Get to Know Paketo Buildpacks.</h1>
-        <section class="author"><img src="../../images/authors/kvedurmudi.jpg" /><name>Kashyap Vedurmudi</name></section>
+        <section class="author"><img src="/images/authors/kvedurmudi.jpg" /><name>Kashyap Vedurmudi</name></section>
         <date>Tuesday, Apr 21, 2020</date>
         <article>
-          <p><img src="../../images/posts/0001/logo.png" alt="Logo"></p>
+          <p><img src="/images/posts/0001/logo.png" alt="Logo"></p>
 <p>I’m excited to announce the launch of <a href="https://paketo.io/">Paketo Buildpacks</a>,
 a collection of Cloud Native Buildpacks for the most popular languages and
 frameworks. Paketo Buildpacks make it easy for you to build and patch
@@ -114,21 +114,21 @@ using a local Minikube cluster for this demo.</p>
 <a href="https://github.com/paketo-buildpacks/samples/tree/master/demo-apps/app-source">here</a>.</p>
 <p>Let’s build a simple Node.js app using pack and the Node.js Paketo Buildpack.</p>
 <pre tabindex="0"><code>$ pack build paketo-demo-app -p &lt;/path/to/app/source&gt; --builder gcr.io/paketo-buildpacks/builder:base
-</code></pre><p><img src="../../images/posts/0001/demo-1.gif" alt="Demo 1"></p>
+</code></pre><p><img src="/images/posts/0001/demo-1.gif" alt="Demo 1"></p>
 <p>Now, let’s quickly validate that our app is working as expected.</p>
 <pre tabindex="0"><code>$ docker run -p 8080:8080 -e PORT=8080 paketo-demo-app &amp;
 $ curl localhost:8080/greeting
-</code></pre><p><img src="../../images/posts/0001/demo-2.gif" alt="Demo 2"></p>
+</code></pre><p><img src="/images/posts/0001/demo-2.gif" alt="Demo 2"></p>
 <p>Awesome, it works! Now let’s tag our image and publish it to a registry
 location. We’re using a GCR registry for this demo.</p>
 <pre tabindex="0"><code>$ docker tag paketo-demo-app &lt;/registry/path/to/demo/image&gt;
 $ docker push &lt;/registry/path/to/demo/image&gt;
-</code></pre><p><img src="../../images/posts/0001/demo-3.gif" alt="Demo 3"></p>
+</code></pre><p><img src="/images/posts/0001/demo-3.gif" alt="Demo 3"></p>
 <p>Finally, let’s deploy our app image to our live Kubernetes cluster.</p>
 <pre tabindex="0"><code>$ kubectl create deployment paketo-node --image=&lt;/registry/path/to/demo/image&gt;
 $ kubectl expose deployment paketo-node --type=LoadBalancer --port=8080
 $ minikube service paketo-node
-</code></pre><p><img src="../../images/posts/0001/demo-4.gif" alt="Demo 4"></p>
+</code></pre><p><img src="/images/posts/0001/demo-4.gif" alt="Demo 4"></p>
 <p>And that’s it! It’s that simple to get started with Paketo Buildpacks! You can
 run <code>kubectl get services</code> to find the IP address of your deployed app.</p>
 <h2 id="give-paketo-buildpacks-a-try">Give Paketo Buildpacks a Try!</h2>
@@ -151,15 +151,15 @@ about how Cloud Native Buildpacks work.</li>
       </section>
       <footer class="post">
         <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Paketo%20Buildpacks%20%7c%20Blog%20%7c%20Building%20apps%20for%20Kubernetes?%20Get%20to%20Know%20Paketo%20Buildpacks.&amp;url=https://blog.paketo.io/posts/get-to-know-paketo-buildpacks/" target="_blank" rel="noopener noreferrer">
-  <img src="../../images/social/twitter.png" />
+  <img src="/images/social/twitter.png" />
 </a>
 
         <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://blog.paketo.io/posts/get-to-know-paketo-buildpacks/" target="_blank" rel="noopener noreferrer">
-  <img src="../../images/social/linkedin.png" />
+  <img src="/images/social/linkedin.png" />
 </a>
 
         <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.paketo.io/posts/get-to-know-paketo-buildpacks/" target="_blank" rel="noopener noreferrer">
-  <img src="../../images/social/facebook.png" />
+  <img src="/images/social/facebook.png" />
 </a>
 
       </footer>
