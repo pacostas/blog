@@ -4,7 +4,7 @@
       <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Building a Cloud Native Buildpack Isn’t as Hard as You Think | Paketo Buildpacks | Blog</title>
-<link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+<link rel="shortcut icon" type="image/png" href="../../favicon.ico" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="content-language" content="en-us" />
 
@@ -24,25 +24,25 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-TJMQZ5RDFG');
-</script><link rel="stylesheet" href="/scss/main.min.css">
+</script><link rel="stylesheet" href="../../scss/main.min.css">
 
   </head>
   <body>
     <div class="post">
       <header>
-        <a href="/">
-          <img class="logo" src="/images/logo512.png" />
+        <a href="../../">
+          <img class="logo" src="../../images/logo512.png" />
           <h1>Paketo Buildpacks | Blog</h1>
         </a>
       </header>
       <section>
         <h1>Building a Cloud Native Buildpack Isn’t as Hard as You Think</h1>
-        <section class="author"><img src="/images/authors/swigmore.jpg" /><name>Sophie Wigmore</name></section>
+        <section class="author"><img src="../../images/authors/swigmore.jpg" /><name>Sophie Wigmore</name></section>
         <date>Friday, Feb 26, 2021</date>
         <article>
           <p>Maybe you’ve heard that many companies today are transitioning to, or have already transitioned to, a container-based platform like Kubernetes. With this movement comes the need to containerize your applications, new and old. Buildpacks provide a seamless mechanism for doing that <em>without Dockerfiles.</em> <a href="https://paketo.io">Paketo Buildpacks</a> is a community-driven project that provides <a href="https://buildpacks.io">Cloud Native Buildpacks</a> implementations for the most popular languages.</p>
 <p>Buildpacks provide great out-of-box support for many languages, but <strong>what if you need a buildpack that doesn’t exist yet?</strong> As a community-driven initiative, it may feel like the onus is on you to create that buildpack. Where would you even begin? 🤯</p>
-<p>Paketo Buildpacks strives to make answering those questions transparent, approachable, and simple. The idea of being a community-driven project is splashed across our <a href="/posts/get-to-know-paketo-buildpacks">blog posts</a>, and <a href="/posts/2021-roadmap">roadmap</a> for a reason. As an engineer who recently learned the ropes of working on buildpacks myself, I’ll explain why building a buildpack isn’t as hard as you might think, and provide some tips and tricks I&rsquo;ve learned along the way.</p>
+<p>Paketo Buildpacks strives to make answering those questions transparent, approachable, and simple. The idea of being a community-driven project is splashed across our <a href="../../posts/get-to-know-paketo-buildpacks">blog posts</a>, and <a href="../../posts/2021-roadmap">roadmap</a> for a reason. As an engineer who recently learned the ropes of working on buildpacks myself, I’ll explain why building a buildpack isn’t as hard as you might think, and provide some tips and tricks I&rsquo;ve learned along the way.</p>
 <h2 id="keep-it-simple"><strong>Keep it simple</strong></h2>
 <p>Part of our philosophy when it comes to writing buildpacks is to keep it simple. We want each buildpack to do one job and do it well. This way many simple buildpacks can be combined to achieve complex behaviours.</p>
 <p>This is both a blessing and a curse when it comes to writing buildpacks. It’s a blessing for obvious reasons: since the buildpack only needs to focus on one major task, it&rsquo;s simpler to write. We try to pick good defaults that would make the experience better in the vast majority of cases, while keeping our APIs streamlined, but meaningful.</p>
@@ -50,7 +50,7 @@
 Because our buildpacks perform one task each, in unique use cases it can be hard to discern if you need a fully new buildpack for your case, or if an existing buildpack just needs a tweak. It doesn’t always make sense to architect a new buildpack, but it can be hard to make this judgement if you’re not closely acquainted with buildpacks that are already available.</p>
 <h2 id="two-roads-diverged">Two roads diverged</h2>
 <p>One way to determine if you need a new buildpack is to think about if the feature in question is completely new functionality, or if it’s an unimplemented subset of existing buildpack functionality.
-<img src="/images/posts/0005/roads-diverged.jpg" alt="Roads-Diverged"></p>
+<img src="../../images/posts/0005/roads-diverged.jpg" alt="Roads-Diverged"></p>
 <h3 id="when-to-add-a-new-buildpack">When to add a new buildpack</h3>
 <p>New functionality usually means a new buildpack is needed. An example of this can be seen with the <a href="https://github.com/paketo-buildpacks/rails-assets">Rails Assets buildpack</a>. A user, <a href="https://github.com/drnic">@drnic</a> filed <a href="https://github.com/paketo-buildpacks/ruby/issues/470">an issue</a> about performing asset compilation for Ruby apps, which was completely unsupported behaviour in the Ruby buildpacks. A Ruby maintainer, <a href="https://github.com/ryanmoran">@ryanmoran</a> wrote up <a href="https://github.com/paketo-buildpacks/ruby/pull/475">an RFC</a> to propose a new buildpack for the functionality, and a contributor <a href="https://github.com/genevieve">@genevievelesperance</a> actually <a href="https://github.com/genevieve/rails-assets">implemented the buildpack</a>. (If you’re interested in this workflow, look out for a future blog post outlining our contribution process!) The idea here is that a new buildpack was needed in order to support completely new functionality.</p>
 <p>Another example of this case is when a brand new dependency or runtime is needed in an app image. If a buildpack providing the specific distribution that you need doesn&rsquo;t exist, then this would be another good indicator that a new buildpack is needed. This is slightly different than the Rails Assets example above, because that buildpack performs a new behaviour, but doesn&rsquo;t provide a dependency. An example of a need for a new runtime can be seen with the <a href="https://github.com/paketo-community/rust">Rust buildpack</a>. Contributor <a href="https://github.com/dmikusa-pivotal">@dmikusa-pivotal</a> put together a set of new buildpacks to support Rust-based apps. Specifically the <a href="https://github.com/paketo-community/rust-dist">Rust Dist buildpack</a> is an example of creating a new buildpack in order to provide a new runtime.</p>
@@ -108,15 +108,15 @@ Because our buildpacks perform one task each, in unique use cases it can be hard
       </section>
       <footer class="post">
         <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Paketo%20Buildpacks%20%7c%20Blog%20%7c%20Building%20a%20Cloud%20Native%20Buildpack%20Isn%e2%80%99t%20as%20Hard%20as%20You%20Think&amp;url=https://blog.paketo.io/posts/building-a-cloud-native-buildpack-isnt-as-hard-as-you-think/" target="_blank" rel="noopener noreferrer">
-  <img src="/images/social/twitter.png" />
+  <img src="../../images/social/twitter.png" />
 </a>
 
         <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://blog.paketo.io/posts/building-a-cloud-native-buildpack-isnt-as-hard-as-you-think/" target="_blank" rel="noopener noreferrer">
-  <img src="/images/social/linkedin.png" />
+  <img src="../../images/social/linkedin.png" />
 </a>
 
         <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.paketo.io/posts/building-a-cloud-native-buildpack-isnt-as-hard-as-you-think/" target="_blank" rel="noopener noreferrer">
-  <img src="/images/social/facebook.png" />
+  <img src="../../images/social/facebook.png" />
 </a>
 
       </footer>
