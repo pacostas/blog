@@ -36,21 +36,27 @@ jobs:
            --arg hugo "${HUGO_VERSION}" \
            '{ hugo: $hugo }' > ./scripts/.util/tools.json
 
+    # Just to ensure that nothing fails during build process.
+    - name: Build
+      id: build
+      run: bash ./scripts/build.sh
+
     - name: Commit
       id: commit
+      if: ${{ steps.build.outcome == 'success' }}
       uses: paketo-buildpacks/github-config/actions/pull-request/create-commit@main
       with:
         message: "Updating tools"
         pathspec: "."
 
     - name: Push Branch
-      if: ${{ steps.commit.outputs.commit_sha != '' }}
+      if: ${{ steps.build.outcome == 'success' && steps.commit.outputs.commit_sha != '' }}
       uses: paketo-buildpacks/github-config/actions/pull-request/push-branch@main
       with:
         branch: automation/tools/update
 
     - name: Open Pull Request
-      if: ${{ steps.commit.outputs.commit_sha != '' }}
+      if: ${{ steps.build.outcome == 'success' && steps.commit.outputs.commit_sha != '' }}
       uses: paketo-buildpacks/github-config/actions/pull-request/open@main
       with:
         token: ${{ github.token }}
